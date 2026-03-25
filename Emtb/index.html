@@ -1,0 +1,278 @@
+<!-- © 2026 Galician. All rights reserved -->
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>eMTB</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@700;900&display=swap" rel="stylesheet">
+
+<style>
+*{ margin:0; padding:0; box-sizing:border-box; font-family:'Inter',sans-serif; }
+html{ scroll-behavior:smooth; }
+body{ background:black; }
+
+header{
+position:fixed;
+top: 0;
+left: 0;
+width:100%;
+padding:15px 60px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+z-index:100;
+background:rgba(0, 0, 0, 0.219);
+backdrop-filter: blur(5px);
+}
+
+.logo{ color:white; font-size:34px; text-decoration:none; }
+nav{ display:flex; gap:40px; align-items:center; }
+nav a{ color:white; text-decoration:none; font-size:24px; }
+.login-btn{ border:3px solid white; padding:0 20px; }
+.lang-btn{ padding: 1%; color:white; cursor:pointer; }
+
+.header-cart {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    position: relative;
+    cursor: pointer;
+}
+.header-cart img {
+    width: 28px;
+    height: 28px;
+}
+#cart-count {
+    background: #00000070;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 50%;
+    min-width: 24px;
+    text-align: center;
+}
+
+.hero{
+height:100vh;
+background:url("MainImage.png");
+background-size:cover;
+background-position:center;
+display:flex;
+align-items:center;
+padding-left:200px;
+padding-bottom:260px;
+color:black;
+}
+.hero h1{ font-size:180px; color:#ca1e1e; }
+.hero p{ font-size:38px; margin:15px 0 30px; }
+.hero button{ padding:6px 40px; font-size:26px; border:3px solid black; background:transparent; cursor:pointer; }
+
+.section-two{ height:100vh; background:white; display:flex; justify-content:center; align-items:center; padding-top: 80px; }
+.bike-wrapper{ text-align:center; position:relative; }
+.bike-wrapper img{ width:1000px; max-width:90%; }
+.bike-wrapper h2{ font-size:50px; margin-bottom:80px; }
+
+.point{ position:absolute; width:20px; height:20px; background:#00ff66; border-radius:50%; cursor:pointer; }
+.point::after{ content:""; position:absolute; inset:0; border-radius:50%; border:2px solid #00ff66; animation:pulse 1.5s infinite; }
+@keyframes pulse{ 0%{transform:scale(1);opacity:1;} 100%{transform:scale(2);opacity:0;} }
+.tooltip{ position:absolute; top:50%; left:120%; transform:translateY(-50%); background:black; color:white; padding:8px 18px; border-radius:6px; white-space:nowrap; opacity:0; transition:0.3s; }
+.point:hover .tooltip{ opacity:1; }
+
+.section-three{ background:white; padding:120px 60px; }
+.card-wrapper{ display:flex; justify-content:center; gap:225px; }
+
+.product-card{ position:relative; width:314px; height:727px; overflow:visible; cursor:pointer; }
+.product-card1{ background:url("MTBCart1.png"); background-size:cover; }
+.product-card2{ background:url("MTBCart2.png"); background-size:cover; }
+.product-card3{ background:url("MTBCart3.png"); background-size:cover; }
+.info-top{ text-align:center; padding-top:40px; z-index:3; position:relative; }
+.title{ font-size:24px; }
+.price{ font-size:60px; font-weight:900; }
+.bike-img{ position:absolute; top:52%; left:52.5%; transform:translate(-50%,-50%); width:330px; transition:0.4s; }
+.product-card:hover .bike-img{ transform:translate(-49%,-50%) scale(1.02); }
+
+.addtocart-btn{
+height: 48px;
+position:absolute;
+bottom:10px;
+left:50%;
+transform:translateX(-50%);
+background:black;
+color:white;
+border:none;
+width:60%;
+padding:14px;
+border-radius:10px 10px 0px 10px;
+font-size:25px;
+font-weight: 530;
+display:flex;
+justify-content:center;
+align-items:center;
+gap:10px;
+cursor:pointer;
+transition: 0.3s;
+}
+.addtocart-btn:hover { background:rgb(29, 29, 29); }
+.cart-icon{ fill: white; width:22px; height:22px; }
+.product-link{ text-decoration:none; color:inherit; }
+
+.arrowdown {
+    bottom: 5%;
+    position:absolute;
+    right: 95%;
+    font-size: 65px;
+    text-decoration: none;
+    color:black;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<a class="logo" href="index.html">MBikes</a>
+<nav>
+<a href="#section-two" class="nav-item" data-en="More" data-ru="Подробнее">More</a>
+<a href="#section-three" class="nav-item" data-en="Buy" data-ru="Купить">Buy</a>
+<a href="#section-three" class="nav-item" data-en="Bikes" data-ru="Велосипеды">Bikes</a>
+<a class="login-btn" data-en="Login" data-ru="Войти" href="login.html">Login</a>
+
+<div class="header-cart" onclick="cartpage()">
+    <img src="cart.svg" alt="Cart">
+    <span id="cart-count">0</span>
+</div>
+
+<span class="lang-btn" onclick="toggleLang()" data-en="RU" data-ru="EN">EN</span>
+</nav>
+</header>
+
+<section class="hero">
+<div>
+<h1>MTB</h1>
+<p data-en="Mountain Bikes" data-ru="Горные Велосипеды">electric Mountain Bike</p>
+<a href="#section-two">
+<button class="see-more" data-en="See more >" data-ru="Смотреть >">See more ></button>
+</a>
+</div>
+</section>
+
+<section id="section-two" class="section-two">
+<div class="bike-wrapper">
+<h2 id="componentsTitle" data-en="Let's take a look at the components..." data-ru="Давайте посмотрим на компоненты...">Let's take a look at the components...</h2>
+<img src="BikeProperties.png">
+<div class="point" style="top:35%;left:25%;"><div class="tooltip" data-en="Seat" data-ru="Сиденье">Seat</div></div>
+<div class="point" style="top:42%;left:38%;"><div class="tooltip" data-en="Rear Suspension" data-ru="Задний амортизатор">Rear Suspension</div></div>
+<div class="point" style="top:75%;left:42%;"><div class="tooltip" data-en="Crankset" data-ru="Шатуны">Crankset</div></div>
+<div class="point" style="top:70%;left:88%;"><div class="tooltip" data-en="Maxxis Wheels" data-ru="Колёса">Maxxis Wheels</div></div>
+<div class="point" style="top:40%;left:65%;"><div class="tooltip" data-en="Front Suspension" data-ru="Передний амортизатор">Front Suspension</div></div>
+    <a href="#section-three" class="arrowdown">🡫</a>
+</div>
+</section>
+
+<section id="section-three" class="section-three">
+<div class="card-wrapper">
+    <a href="bike1.html" class="product-link">
+        <div class="product-card product-card1">
+            <div class="info-top"><p class="title">MTB GREEN</p><p class="price">199$</p></div>
+            <img src="MTB-GREEN.png" class="bike-img">
+            <button class="addtocart-btn js-add" data-name="MTB GREEN" data-price="199" data-size="165 – 175 cm">
+                <img src="cart.svg" class="cart-icon">
+                <p data-en="add to cart" data-ru="в корзину"></p>
+            </button>
+        </div>
+    </a>
+
+    <a href="bike2.html" class="product-link">
+        <div class="product-card product-card2">
+            <div class="info-top"><p class="title">MTB BLUE</p><p class="price">199$</p></div>
+            <img src="MTB-BLUE.png" class="bike-img">
+            <button class="addtocart-btn js-add" data-name="MTB BLUE" data-price="199" data-size="165 – 175 cm">
+                <img src="cart.svg" class="cart-icon">
+                <p data-en="add to cart" data-ru="в корзину"></p>
+            </button>
+        </div>
+    </a>
+
+    <a href="bike3.html" class="product-link">
+        <div class="product-card product-card3">
+            <div class="info-top"><p class="title">MTB ORANGE</p><p class="price">199$</p></div>
+            <img src="MTB-ORANGE.png" class="bike-img">
+            <button class="addtocart-btn js-add" data-name="MTB ORANGE" data-price="199" data-size="165 – 175 cm">
+                <img src="cart.svg" class="cart-icon">
+                <p data-en="add to cart" data-ru="в корзину"></p>
+            </button>
+        </div>
+    </a>
+</div>
+</section>
+
+<script>
+let cart = JSON.parse(localStorage.getItem('my_cart')) || [];
+const cartCountElement = document.getElementById('cart-count');
+const sizeSelect = document.querySelector(".size-select");
+const addBtn = document.querySelector(".js-add");
+
+function updateCount() {
+    if (cartCountElement) {
+        cartCountElement.textContent = cart.length;
+    }
+}
+updateCount();
+
+addBtn.onclick = (e) => {
+    e.preventDefault();
+
+    const selectedSize = sizeSelect.value;
+
+    if (!selectedSize || selectedSize === "Choose your height") {
+        alert(currentLang === "en" ? "Please select your height first!" : "Пожалуйста, выберите рост!");
+        return;
+    }
+
+    const item = {
+        name: addBtn.getAttribute('data-image'),
+        name: addBtn.getAttribute('data-name'),
+        price: addBtn.getAttribute('data-price'),
+        size: selectedSize
+    };
+
+    cart.push(item);
+    localStorage.setItem('my_cart', JSON.stringify(cart));
+    
+    updateCount();
+
+    addBtn.style.background = "#00ff66";
+    addBtn.style.transform = "scale(0.95)";
+    
+    setTimeout(() => { 
+        addBtn.style.background = "black";
+        addBtn.style.transform = "scale(1)";
+    }, 300);
+};
+
+let currentLang = localStorage.getItem("lang") || "en";
+
+function applyLang() {
+    document.querySelectorAll("[data-en]").forEach(el => {
+        el.textContent = el.getAttribute("data-" + currentLang);
+    });
+}
+
+function toggleLang() {
+    currentLang = currentLang === "en" ? "ru" : "en";
+    localStorage.setItem("lang", currentLang);
+    applyLang();
+}
+
+applyLang();
+
+function cartpage() {
+    window.location.href = 'cart.html';
+}
+
+</script>
+
+</body>
+</html>
